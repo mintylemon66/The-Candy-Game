@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+
+    <link rel="icon" href="Images/icon2.png" type="image/icon type">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<style>
+
+
+@import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap');
+.baskervville-sc-regular {
+    font-family: "Baskervville SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  
+ 
+*{    font-family: "Baskervville SC", serif;}
+body {
+ 
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    input[type=number], select {
+        padding: 8px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+        width: auto;
+    }
+
+    button {
+    background-color: #add8e6;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;  /* Allow sparkles to show outside the button */
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05); /* Scale button on hover */
+}
+
+
+
+
+button::before, button::after {
+    content: '';
+    position: absolute;
+    top: -10px; /* Positioning above and around the button */
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: -1; /* Positioned under the button */
+    background: radial-gradient(circle, #ffffff 10%, transparent 10%), 
+                radial-gradient(circle, #ffffff 10%, transparent 10%);
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: sparkle 1s infinite alternate ease-in-out;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+button:hover::before, button:hover::after {
+    opacity: 1;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(0.5);
+        background-size: 200% 200%;
+    }
+    100% {
+        transform: scale(1.5);
+        background-size: 300% 300%;
+    }
+}
+
+
+
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #144fff;
+    z-index: 1000;
+    animation: celebrationAnimation 2s ease-in-out;
+}
+
+@keyframes celebrationAnimation {
+    0% { background: rgba(255, 255, 255, 0); }
+    100% { background: rgba(255, 255, 255, 0.8); }
+}
+
+.confetti {
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #ffcc00;
+    animation: fall 3s infinite linear;
+}
+
+@keyframes fall {
+    0% { top: -10%; transform: rotate(0deg); }
+    100% { top: 110%; transform: rotate(360deg); }
+}
+
+
+    .block-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .block {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s, opacity 0.3s;
+    }
+
+    .play-again {
+    background-color: #add8e6;  
+    border: none;
+    color: white;
+    padding: 15px 32px;
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10%;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.play-again:hover {
+    transform: scale(1.05); /* Scale button on hover */
+}
+
+
+
+
+.play-again::before, button::after {
+    content: '';
+    position: absolute;
+    top: -10px; /* Positioning above and around the button */
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: -1; /* Positioned under the button */
+    background: radial-gradient(circle, #ffffff 10%, transparent 10%), 
+                radial-gradient(circle, #ffffff 10%, transparent 10%);
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: sparkle 1s infinite alternate ease-in-out;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.play-again:hover::before, .play-again:hover::after {
+    opacity: 1;
+}
+
+    .block:not(:last-child) {
+        border-right: none;
+    }
+
+    .eaten {
+        opacity: 0.2;
+        cursor: default;
+    }
+
+    .block:hover {
+        opacity: 0.8;
+    }
+
+    .message {
+        text-align: center;
+        margin: 10%;
+        font-size: 20px;
+        border: 2px solid #add8e6;
+        padding: 10px;
+        background-color: #e6f4fd;
+        border-radius: 4px;
+    }
+    .block-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .block {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s, opacity 0.3s;
+    }
+
+    .block:not(:last-child) {
+        border-right: none;
+    }
+
+    .eaten {
+        opacity: 0.2;
+        cursor: default;
+    }
+
+    .block:hover {
+        opacity: 0.8;
+    }
+
+    .message {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+</style>
+<title>The Candy Game</title>
+</head>
+<body>
+<div>
+    <label for="gameMode">Game Mode:</label>
+    <select id="gameMode">
+        <option value="pvp">Player vs Player</option>
+        <option value="pvc">Player vs Komputer</option>
+    </select>
+    <button onclick="startGame()">Start Game</button>
+</div>
+<div>
+    <label for="numBlocks">Number of candy blocks:</label>
+    <input type="number" id="numBlocks" min="1" style="margin-right: 10px;">
+    <label for="numColors">Number of colors:</label>
+    <input type="number" id="numColors" min="1" style="margin-right: 10px;">
+    <button onclick="generateBlocks()">Generate Blocks</button>
+</div>
+<div>
+    <label for="candiesToEat">Candies to eat (1-4):</label>
+    <input type="number" id="candiesToEat" min="1" max="4" style="margin-right: 10px;">
+    <button onclick="eatCandies()">Eat Candies</button>
+</div>
+<div id="blockContainer"></div>
+<div class="message" id="gameMessage"> </div> 
+<script>  
+
+let currentPlayer = 1;
+let gameMode = 'pvp';
+let computerPlaysFirst = true;
+
+document.getElementById('gameMode').addEventListener('change', function() {
+    startGame();
+});
+
+function startGame() {
+    gameMode = document.getElementById('gameMode').value;
+    decideComputerTurnOrder();
+    updateTurnMessage();
+}
+
+function generateBlocks() {
+    var container = document.getElementById('blockContainer');
+    var numBlocks = document.getElementById('numBlocks').value || 20;
+    var numColors = document.getElementById('numColors').value || 5;
+
+    container.innerHTML = '';
+    var colors = [];
+    for (let i = 0; i < numColors; i++) {
+        colors.push(`hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)`);
+    }
+
+    let colorIndex = 0;
+    for (let i = 1; i <= numBlocks; i++) {
+        if (Math.random() < 0.3 && i > 1) { // Change color randomly to create clumps
+            colorIndex = Math.floor(Math.random() * numColors);
+        }
+        let block = document.createElement('div');
+        block.className = 'block';
+        block.style.backgroundColor = colors[colorIndex];
+        container.appendChild(block);
+    }
+}
+
+function decideComputerTurnOrder() {
+    if (gameMode === 'pvc') {
+        let blocks = Array.from(document.querySelectorAll('#blockContainer .block'));
+        let lastColor = blocks[blocks.length - 1].style.backgroundColor;
+        let lastClumpSize = blocks.reverse().filter(b => b.style.backgroundColor === lastColor).length;
+
+        // Determine if the position is advantageous
+        computerPlaysFirst = (lastClumpSize % 5 !== 1);
+        currentPlayer = computerPlaysFirst ? 2 : 1; // If computer plays first, set it to 2
+    } else {
+        currentPlayer = 1; // Player starts in PvP
+    }
+}
+
+function eatCandies() {
+    var candiesToEat = parseInt(document.getElementById('candiesToEat').value, 10);
+    var blocks = Array.from(document.querySelectorAll('#blockContainer .block:not(.eaten)'));
+    var startColor = blocks[0].style.backgroundColor;
+    var count = 0;
+
+    for (let block of blocks) {
+        if (count >= candiesToEat) break;
+        if (block.style.backgroundColor === startColor) {
+            block.classList.add('eaten');
+            count++;
+        } else {
+            break;
+        }
+    }
+
+    checkForEndGame();
+}
+
+function computerTurn() {
+    var blocks = Array.from(document.querySelectorAll('#blockContainer .block:not(.eaten)'));
+    if (blocks.length === 0) return;
+
+    let remainingBlocks = blocks.filter(b => !b.classList.contains('eaten'));
+    let colorGroups = remainingBlocks.reduce((acc, block) => {
+        acc[block.style.backgroundColor] = (acc[block.style.backgroundColor] || []).concat(block);
+        return acc;
+    }, {});
+
+    let largestGroup = Object.values(colorGroups).reduce((largest, group) => largest.length > group.length ? largest : group, []);
+
+    let candiesToEat = Math.min(4, largestGroup.length);
+    document.getElementById('candiesToEat').value = candiesToEat;
+    eatCandies();
+}
+
+function checkForEndGame() {
+    let remaining = document.querySelectorAll('#blockContainer .block:not(.eaten)').length;
+    if (remaining === 0) {
+        endGame();
+    } else {
+        switchPlayer();
+    }
+}
+
+function endGame() {
+    let message = (currentPlayer === 1) ? 'You LOSE' : 'You WIN';
+    if (gameMode === 'pvp') {
+        message = (currentPlayer === 1) ? 'Winner: 2nd player' : 'Winner 1st player';
+    }
+    showCelebration(message);
+}
+
+function showCelebration(message) {
+    const overlay = document.createElement('div');
+    overlay.className = 'celebration-overlay';
+    overlay.innerHTML = `<span>${message}</span> `; // Display game end status
+
+ 
+    // Play Again button
+    const playAgainButton = document.createElement('button');
+    playAgainButton.className = 'play-again';
+    playAgainButton.textContent = 'PLAY AGAIN';
+    playAgainButton.onclick = function() {
+        overlay.remove();
+        startGame(); // Restart the game
+    };
+    overlay.appendChild(playAgainButton);
+
+    document.body.appendChild(overlay);
+
+    // Add confetti
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDelay = `${Math.random() * 2}s`;
+        overlay.appendChild(confetti);
+    }
+}
+
+function switchPlayer() {
+    currentPlayer = (currentPlayer === 1 ? 2 : 1);
+    updateTurnMessage();
+}
+
+function updateTurnMessage() {
+    let message = (currentPlayer === 1) ? 'Your turn' : 'Computer\'s turn';
+    if (gameMode === 'pvp') {
+        message = 'Player ' + currentPlayer + "'s turn";
+    }
+    document.getElementById('gameMessage').textContent = message;
+    if (gameMode === 'pvc' && currentPlayer === 2) {
+        setTimeout(computerTurn, 500);
+    }
+}
+
+
+</script>
+</body>
+</html>
